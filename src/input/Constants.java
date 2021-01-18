@@ -7,6 +7,7 @@ public final class Constants {
     public static final String NUMBER_OF_TURNS = "numberOfTurns";
     public static final String INITIAL_DATA = "initialData";
     public static final String CONSUMERS = "consumers";
+    public static final String PRODUCERS = "producers";
     public static final String DISTRIBUTORS = "distributors";
     public static final String ID = "id";
     public static final String INITIAL_BUDGET = "initialBudget";
@@ -19,6 +20,14 @@ public final class Constants {
     public static final String PRODUCTION_COST = "productionCost";
     public static final String NEW_CONSUMERS = "newConsumers";
     public static final String COST_CHANGES = "costsChanges";
+    public static final String ENERGY_NEEDED = "energyNeededKW";
+    public static final String STRATEGY = "producerStrategy";
+    public static final String ENERGY_TYPE = "energyType";
+    public static final String MAX_DISTRIBUTORS = "maxDistributors";
+    public static final String PRICE_KW = "priceKW";
+    public static final String ENERGY_PER_DISTRIBUTOR = "energyPerDistributor";
+    public static final String DISTRIBUTOR_CHANGES = "distributorChanges";
+    public static final String PRODUCER_CHANGES = "producerChanges";
     public static final double PROFIT = 0.2;
     public static final double PENALTY = 1.2;
 }

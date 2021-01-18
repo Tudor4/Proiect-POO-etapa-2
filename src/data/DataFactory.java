@@ -3,6 +3,7 @@ package data;
 import input.InputConsumerData;
 import input.InputDistributorData;
 import input.InputMonthlyUpdateData;
+import input.InputProducerData;
 
 public final class DataFactory {
     private static DataFactory instance = null;
@@ -40,7 +41,13 @@ public final class DataFactory {
     public Distributor createDistributor(final InputDistributorData inputDistributor) {
         return new Distributor(inputDistributor.getId(), inputDistributor.getContractLength(),
                 inputDistributor.getBudget(), inputDistributor.getInfrastructureCost(),
-                inputDistributor.getProductionCost());
+                inputDistributor.getEnergyNeeded(), inputDistributor.getStrategy());
+    }
+
+    public Producer createProducer(final InputProducerData inputProducer) {
+        return new Producer(inputProducer.getId(), inputProducer.getEnergyType(),
+                inputProducer.getMaxDistributors(), inputProducer.getPriceKW(),
+                inputProducer.getEnergyPerDistributor());
     }
 
     /**
@@ -53,11 +60,10 @@ public final class DataFactory {
         for (InputConsumerData inputConsumer : inputMonthlyUpdate.getNewConsumers()) {
             monthlyUpdate.getNewConsumers().add(createConsumer(inputConsumer));
         }
-        for (InputDistributorData inputDistributor : inputMonthlyUpdate.getDistributors()) {
-            monthlyUpdate.getDistributors().add(createDistributor(inputDistributor));
-        }
+        monthlyUpdate.getDistributorIds().addAll(inputMonthlyUpdate.getDistributorIds());
         monthlyUpdate.getInfrastructureCosts().addAll(inputMonthlyUpdate.getInfrastructureCosts());
-        monthlyUpdate.getProductionCosts().addAll((inputMonthlyUpdate.getProductionCosts()));
+        monthlyUpdate.getEnergyPerDistributor().addAll(inputMonthlyUpdate.getEnergyPerDistributor());
+        monthlyUpdate.getProducersIds().addAll(inputMonthlyUpdate.getProducerIds());
         return monthlyUpdate;
     }
 
@@ -74,6 +80,8 @@ public final class DataFactory {
             return createConsumer((InputConsumerData) object);
         } else if (object instanceof InputDistributorData) {
             return createDistributor((InputDistributorData) object);
+        } else if (object instanceof  InputProducerData) {
+            return createProducer((InputProducerData) object);
         } else {
             return createMonthlyUpdate((InputMonthlyUpdateData) object);
         }

@@ -96,10 +96,10 @@ public final class Consumer {
 
     @Override
     public String toString() {
-        return "Consumer{"
-                + "id=" + id
-                + ", isBankrupt=" + isBankrupt
-                + ", budget=" + budget
-                + '}';
+        return "Consumer{" +
+                "id=" + id +
+                ", budget=" + budget +
+                ", monthlyIncome=" + monthlyIncome +
+                '}';
     }
 }

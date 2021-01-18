@@ -6,8 +6,9 @@ import java.util.List;
 public final class MonthlyUpdate {
     private List<Consumer> newConsumers = new ArrayList<>();
     private List<Integer> infrastructureCosts = new ArrayList<>();
-    private List<Integer> productionCosts = new ArrayList<>();
-    private List<Distributor> distributors = new ArrayList<>();
+    private List<Integer> distributorIds = new ArrayList<>();
+    private List<Integer> energyPerDistributor = new ArrayList<>();
+    private List<Integer> producersIds = new ArrayList<>();
 
     public List<Consumer> getNewConsumers() {
         return newConsumers;
@@ -17,21 +18,26 @@ public final class MonthlyUpdate {
         return infrastructureCosts;
     }
 
-    public List<Integer> getProductionCosts() {
-        return productionCosts;
+    public List<Integer> getEnergyPerDistributor() {
+        return energyPerDistributor;
     }
 
-    public List<Distributor> getDistributors() {
-        return distributors;
+    public List<Integer> getDistributorIds() {
+        return distributorIds;
+    }
+
+    public List<Integer> getProducersIds() {
+        return producersIds;
     }
 
     @Override
     public String toString() {
-        return "MonthlyUpdate{"
-                + "newConsumers=" + newConsumers
-                + ", infrastructureCosts=" + infrastructureCosts
-                + ", productionCosts=" + productionCosts
-                + ", distributors=" + distributors
-                + '}';
+        return "MonthlyUpdate{" +
+                "newConsumers=" + newConsumers +
+                ", infrastructureCosts=" + infrastructureCosts +
+                ", distributorIds=" + distributorIds +
+                ", energyPerDistributor=" + energyPerDistributor +
+                ", producersIds=" + producersIds +
+                '}';
     }
 }

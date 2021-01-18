@@ -1,13 +1,5 @@
-import input.InputLoader;
-import input.InputConsumerData;
-import input.InputDistributorData;
-import input.InputMonthlyUpdateData;
-import input.Input;
-import data.Consumer;
-import data.Distributor;
-import data.Data;
-import data.DataFactory;
-import data.MonthlyUpdate;
+import data.*;
+import input.*;
 import output.Writer;
 
 public final class Main {
@@ -33,8 +25,24 @@ public final class Main {
         for (InputDistributorData inputDistributorData : input.getDistributors()) {
             data.getDistributors().add((Distributor) factory.factory(inputDistributorData));
         }
+        for (InputProducerData inputProducerData : input.getProducers()) {
+            data.getProducers().add((Producer) factory.factory(inputProducerData));
+        }
         for (InputMonthlyUpdateData inputMonthlyUpdateData : input.getMonthlyUpdates()) {
             data.getMonthlyUpdates().add((MonthlyUpdate) factory.factory(inputMonthlyUpdateData));
+        }
+
+        for (Consumer consumer : data.getConsumers()) {
+            System.out.println(consumer);
+        }
+        for (Distributor distributor : data.getDistributors()) {
+            System.out.println(distributor);
+        }
+        for (Producer producer : data.getProducers()) {
+            System.out.println(producer);
+        }
+        for (MonthlyUpdate update : data.getMonthlyUpdates()) {
+            System.out.println(update);
         }
 
         data.simulateTurn();

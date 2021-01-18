@@ -1,20 +1,24 @@
 package input;
 
+import strategies.EnergyChoiceStrategyType;
+
 public final class InputDistributorData {
     private int id;
     private int contractLength;
     private int budget;
     private int infrastructureCost;
-    private int productionCost;
+    private int energyNeeded;
+    private String strategy;
 
     public InputDistributorData(final int id, final int contractLength, final int initialBudget,
-                                final int initialInfrastructureCost,
-                                final int initialProductionCost) {
+                                final int initialInfrastructureCost, final int energyNeeded,
+                                final String strategy) {
         this.id = id;
         this.contractLength = contractLength;
         this.budget = initialBudget;
         this.infrastructureCost = initialInfrastructureCost;
-        this.productionCost = initialProductionCost;
+        this.energyNeeded = energyNeeded;
+        this.strategy = strategy;
     }
 
     public int getId() {
@@ -49,22 +53,13 @@ public final class InputDistributorData {
         this.infrastructureCost = infrastructureCost;
     }
 
-    public int getProductionCost() {
-        return productionCost;
+    public int getEnergyNeeded() {
+        return energyNeeded;
     }
 
-    public void setProductionCost(final int productionCost) {
-        this.productionCost = productionCost;
+    public String getStrategy() {
+        return strategy;
     }
 
-    @Override
-    public String toString() {
-        return "Distributor{"
-                + "id=" + id
-                + ", contractLength=" + contractLength
-                + ", budget=" + budget
-                + ", infrastructureCost=" + infrastructureCost
-                + ", productionCost=" + productionCost
-                + '}';
-    }
+
 }

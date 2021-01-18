@@ -5,17 +5,20 @@ import java.util.List;
 public final class InputMonthlyUpdateData {
     private List<InputConsumerData> newConsumers;
     private List<Integer> infrastructureCosts;
-    private List<Integer> productionCosts;
-    private List<InputDistributorData> distributors;
+    private List<Integer> distributorIds;
+    private List<Integer> EnergyPerDistributor;
+    private List<Integer> producerIds;
 
     public InputMonthlyUpdateData(final List<InputConsumerData> newConsumers,
                                   final List<Integer> infrastructureCosts,
-                                  final List<Integer> productionCosts,
-                                  final List<InputDistributorData> distributors) {
+                                  final List<Integer> distributorIds,
+                                  final List<Integer> EnergyPerDistributor,
+                                  final List<Integer> producerIds) {
         this.newConsumers = newConsumers;
         this.infrastructureCosts = infrastructureCosts;
-        this.productionCosts = productionCosts;
-        this.distributors = distributors;
+        this.distributorIds = distributorIds;
+        this.EnergyPerDistributor = EnergyPerDistributor;
+        this.producerIds = producerIds;
     }
 
     public List<InputConsumerData> getNewConsumers() {
@@ -26,22 +29,15 @@ public final class InputMonthlyUpdateData {
         return infrastructureCosts;
     }
 
-    public List<Integer> getProductionCosts() {
-        return productionCosts;
+    public List<Integer> getDistributorIds() {
+        return distributorIds;
     }
 
-    public List<InputDistributorData> getDistributors() {
-        return distributors;
+    public List<Integer> getEnergyPerDistributor() {
+        return EnergyPerDistributor;
     }
 
-
-    @Override
-    public String toString() {
-        return "MonthlyUpdate{"
-                + "newConsumers=" + newConsumers
-                + ", infrastructureCosts=" + infrastructureCosts
-                + ", productionCosts=" + productionCosts
-                + ", distributors=" + distributors
-                + '}';
+    public List<Integer> getProducerIds() {
+        return producerIds;
     }
 }

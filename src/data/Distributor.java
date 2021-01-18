@@ -2,26 +2,33 @@ package data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public final class Distributor {
+public final class Distributor{
     private int id;
     private int contractLength;
     private int budget;
     private int infrastructureCost;
     private int productionCost;
+    private int energyNeeded;
+    private String strategy;
     private int numberOfConsumers = 0;
     private int price = 0;
     private List<Contract> contracts = new ArrayList<>();
     private boolean isBankrupt = false;
     private List<Consumer> consumers = new ArrayList<>();
+    private Producer producer;
 
     public Distributor(final int id, final int contractLength, final int initialBudget,
-                       final int initialInfrastructureCost, final int initialProductionCost) {
+                       final int initialInfrastructureCost, final int energyNeeded,
+                       final String strategy) {
         this.id = id;
         this.contractLength = contractLength;
         this.budget = initialBudget;
         this.infrastructureCost = initialInfrastructureCost;
-        this.productionCost = initialProductionCost;
+        this.energyNeeded = energyNeeded;
+        this.strategy = strategy;
     }
 
     public int getId() {
@@ -76,6 +83,22 @@ public final class Distributor {
         return contracts;
     }
 
+    public int getEnergyNeeded() {
+        return energyNeeded;
+    }
+
+    public void setEnergyNeeded(int energyNeeded) {
+        this.energyNeeded = energyNeeded;
+    }
+
+    public String getStrategy() {
+        return strategy;
+    }
+
+    public void setStrategy(String strategy) {
+        this.strategy = strategy;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -104,12 +127,24 @@ public final class Distributor {
         this.consumers = consumers;
     }
 
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
     @Override
     public String toString() {
-        return "Distributor{"
-                + "id=" + id
-                + ", budget=" + budget
-                + ", isBankrupt=" + isBankrupt
-                + '}';
+        return "Distributor{" +
+                "id=" + id +
+                ", contractLength=" + contractLength +
+                ", budget=" + budget +
+                ", infrastructureCost=" + infrastructureCost +
+                ", energyNeeded=" + energyNeeded +
+                ", strategy='" + strategy + '\'' +
+                '}';
     }
+
 }

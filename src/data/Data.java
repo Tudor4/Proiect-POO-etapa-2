@@ -9,7 +9,9 @@ public final class Data {
     private int numberOfTurns;
     private List<Consumer> consumers = new ArrayList<>();
     private List<Distributor> distributors = new ArrayList<>();
+    private List<Producer> producers = new ArrayList<>();
     private List<MonthlyUpdate> monthlyUpdates = new ArrayList<>();
+    private int monthNr = 1;
     private boolean gameOver = false;
 
     public int getNumberOfTurns() {
@@ -28,6 +30,10 @@ public final class Data {
         return distributors;
     }
 
+    public List<Producer> getProducers() {
+        return producers;
+    }
+
     public List<MonthlyUpdate> getMonthlyUpdates() {
         return monthlyUpdates;
     }
@@ -42,15 +48,21 @@ public final class Data {
      */
     public void update(final MonthlyUpdate update) {
         consumers.addAll(update.getNewConsumers());
-        for (Distributor distributor : update.getDistributors()) {
+        for (Integer distributorId : update.getDistributorIds()) {
             for (Distributor databaseDistributor : distributors) {
-                if (databaseDistributor.getId() == distributor.getId()) {
+                if (databaseDistributor.getId() == distributorId) {
                     databaseDistributor.setInfrastructureCost(update
                             .getInfrastructureCosts().get(update
-                                    .getDistributors().indexOf(distributor)));
-                    databaseDistributor.setProductionCost(update
-                            .getProductionCosts().get(update
-                                    .getDistributors().indexOf(distributor)));
+                                    .getDistributorIds().indexOf(distributorId)));
+                }
+            }
+        }
+        for (Integer producerId : update.getProducersIds()) {
+            for (Producer databaseProducer : producers) {
+                if (databaseProducer.getId() == producerId) {
+                    databaseProducer.setEnergyPerDistributor(update
+                            .getEnergyPerDistributor().get(update
+                                    .getProducersIds().indexOf(producerId)));
                 }
             }
         }
