@@ -18,7 +18,7 @@ public final class Distributor{
     private List<Contract> contracts = new ArrayList<>();
     private boolean isBankrupt = false;
     private List<Consumer> consumers = new ArrayList<>();
-    private Producer producer;
+    private List<Producer> producers = new ArrayList<>();
 
     public Distributor(final int id, final int contractLength, final int initialBudget,
                        final int initialInfrastructureCost, final int energyNeeded,
@@ -127,24 +127,21 @@ public final class Distributor{
         this.consumers = consumers;
     }
 
-    public Producer getProducer() {
-        return producer;
+    public List<Producer> getProducers() {
+        return producers;
     }
 
-    public void setProducer(Producer producer) {
-        this.producer = producer;
-    }
 
     @Override
     public String toString() {
         return "Distributor{" +
                 "id=" + id +
-                ", contractLength=" + contractLength +
-                ", budget=" + budget +
-                ", infrastructureCost=" + infrastructureCost +
                 ", energyNeeded=" + energyNeeded +
+                ", price=" + price +
+                ", budget=" + budget +
                 ", strategy='" + strategy + '\'' +
+                ", isBankrupt=" + isBankrupt +
+                ", contracts=" + contracts +
                 '}';
     }
-
 }

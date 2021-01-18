@@ -98,8 +98,8 @@ public final class Consumer {
     public String toString() {
         return "Consumer{" +
                 "id=" + id +
+                ", isBankrupt=" + isBankrupt +
                 ", budget=" + budget +
-                ", monthlyIncome=" + monthlyIncome +
                 '}';
     }
 }

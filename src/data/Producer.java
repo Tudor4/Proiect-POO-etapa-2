@@ -74,10 +74,11 @@ public class Producer extends Observable {
     public String toString() {
         return "Producer{" +
                 "id=" + id +
-                ", energyType='" + energyType + '\'' +
-                ", maxDistributors=" + maxDistributors +
+                ", maxDistributors='" + maxDistributors + '\'' +
                 ", priceKW=" + priceKW +
+                ", energyType=" + energyType +
                 ", energyPerDistributor=" + energyPerDistributor +
+                ", monthlyStats=" + monthlyStats +
                 '}';
     }
 }

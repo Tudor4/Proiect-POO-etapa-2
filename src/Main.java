@@ -32,19 +32,6 @@ public final class Main {
             data.getMonthlyUpdates().add((MonthlyUpdate) factory.factory(inputMonthlyUpdateData));
         }
 
-        for (Consumer consumer : data.getConsumers()) {
-            System.out.println(consumer);
-        }
-        for (Distributor distributor : data.getDistributors()) {
-            System.out.println(distributor);
-        }
-        for (Producer producer : data.getProducers()) {
-            System.out.println(producer);
-        }
-        for (MonthlyUpdate update : data.getMonthlyUpdates()) {
-            System.out.println(update);
-        }
-
         data.simulateTurn();
         for (MonthlyUpdate update : data.getMonthlyUpdates()) {
             data.update(update);
@@ -54,6 +41,15 @@ public final class Main {
             }
         }
 
+        /*for (Consumer consumer : data.getConsumers()) {
+            System.out.println(consumer);
+        }
+        for (Distributor distributor : data.getDistributors()) {
+            System.out.println(distributor);
+        }
+        for (Producer producer : data.getProducers()) {
+            System.out.println(producer);
+        }*/
         Writer writer = new Writer(args[1]);
         writer.jsonWrite(data);
     }

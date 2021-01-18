@@ -65,7 +65,6 @@ public class GreenStrategy implements Strategy{
         for (Producer producer : result) {
             producer.getDistributors().add(distributor);
         }
-
         return result;
     }
 }

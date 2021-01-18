@@ -21,10 +21,8 @@ public class QuantityStrategy implements Strategy{
                 return Integer.compare(A.getId(), B.getId());
             }
         });
-
         List<Producer> result =  new ArrayList<>();
         int energyTotal = 0;
-
         while (energyTotal < distributor.getEnergyNeeded()) {
             if (producers.get(0).getDistributors().size() != producers.get(0).getMaxDistributors()) {
                 result.add(producers.get(0));

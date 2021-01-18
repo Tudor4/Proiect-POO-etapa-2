@@ -1,8 +1,12 @@
 package data;
 
 import input.Constants;
+import strategies.GreenStrategy;
+import strategies.PriceStrategy;
+import strategies.QuantityStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class Data {
@@ -11,7 +15,10 @@ public final class Data {
     private List<Distributor> distributors = new ArrayList<>();
     private List<Producer> producers = new ArrayList<>();
     private List<MonthlyUpdate> monthlyUpdates = new ArrayList<>();
-    private int monthNr = 1;
+    private int monthNr = 0;
+    private GreenStrategy greenStrategy = new GreenStrategy();
+    private PriceStrategy priceStrategy = new PriceStrategy();
+    private QuantityStrategy quantityStrategy = new QuantityStrategy();
     private boolean gameOver = false;
 
     public int getNumberOfTurns() {
@@ -57,12 +64,18 @@ public final class Data {
                 }
             }
         }
+    }
+
+    public void updateProducers(final MonthlyUpdate update) {
         for (Integer producerId : update.getProducersIds()) {
             for (Producer databaseProducer : producers) {
                 if (databaseProducer.getId() == producerId) {
                     databaseProducer.setEnergyPerDistributor(update
                             .getEnergyPerDistributor().get(update
                                     .getProducersIds().indexOf(producerId)));
+                    for (Distributor distributor : databaseProducer.getDistributors()) {
+                        distributor.getProducers().clear();
+                    }
                 }
             }
         }
@@ -72,6 +85,9 @@ public final class Data {
      * Rularea unui tur al jocului
      */
     public void simulateTurn() {
+        if (monthNr == 0) {
+            chooseProducers();
+        }
         checkContracts();
         calculatePrices();
         for (Consumer consumer : consumers) {
@@ -87,6 +103,13 @@ public final class Data {
         payExpenses();
         removeContracts();
         checkBankrupcy();
+        if (monthNr != 0) {
+            updateProducers(monthlyUpdates.get(monthNr - 1));
+            chooseProducers();
+            monthlyReport();
+            sort();
+        }
+        monthNr++;
     }
 
     /**
@@ -238,6 +261,10 @@ public final class Data {
                             * distributor.getNumberOfConsumers()
                             - distributor.getInfrastructureCost());
                     distributor.setBankrupt(true);
+                    for (Producer producer : distributor.getProducers()) {
+                        producer.getDistributors().remove(distributor);
+                    }
+                    distributor.getProducers().clear();
                 } else {
                     distributor.setBudget(distributor.getBudget()
                             - distributor.getInfrastructureCost()
@@ -274,6 +301,57 @@ public final class Data {
                 consumer.setContractor(null);
                 consumer.setContract(null);
                 consumer.setHasContract(false);
+            }
+        }
+    }
+
+    public void chooseProducers() {
+        for (Distributor distributor : distributors) {
+            if (distributor.getProducers().size() == 0 && !distributor.isBankrupt()) {
+                for (Producer producer : producers) {
+                    if (producer.getDistributors().contains(distributor)) {
+                        producer.getDistributors().remove(distributor);
+                    }
+                }
+                switch (distributor.getStrategy()) {
+                    case ("GREEN"): {
+                        distributor.getProducers().addAll(greenStrategy.strategy(this, distributor));
+                        break;
+                    }
+                    case ("PRICE"): {
+                        distributor.getProducers().addAll(priceStrategy.strategy(this, distributor));
+                        break;
+                    }
+                    case ("QUANTITY"): {
+                        distributor.getProducers().addAll(quantityStrategy.strategy(this, distributor));
+                        break;
+                    }
+                }
+                double productionCost = 0;
+                for (Producer producer : distributor.getProducers()) {
+                    productionCost += producer.getEnergyPerDistributor() * producer.getPriceKW();
+                }
+                int cost = (int) Math.round(Math.floor(productionCost / 10));
+                distributor.setProductionCost(cost);
+            }
+        }
+    }
+
+    public void monthlyReport() {
+        for (Producer producer : producers) {
+            List<Integer> distributorIds = new ArrayList<>();
+            for (Distributor distributor : producer.getDistributors()) {
+                distributorIds.add(distributor.getId());
+            }
+            Month month = new Month(monthNr, distributorIds);
+            producer.getMonthlyStats().add(month);
+        }
+    }
+
+    public void sort() {
+        for (Producer producer : producers) {
+            for (Month month : producer.getMonthlyStats()) {
+                Collections.sort(month.getDistributorIds());
             }
         }
     }
