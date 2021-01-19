@@ -28,6 +28,7 @@ public final class Constants {
     public static final String ENERGY_PER_DISTRIBUTOR = "energyPerDistributor";
     public static final String DISTRIBUTOR_CHANGES = "distributorChanges";
     public static final String PRODUCER_CHANGES = "producerChanges";
+    public static final int TEN = 10;
     public static final double PROFIT = 0.2;
     public static final double PENALTY = 1.2;
 }

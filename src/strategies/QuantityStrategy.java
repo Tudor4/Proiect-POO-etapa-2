@@ -7,7 +7,7 @@ import data.Producer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuantityStrategy implements Strategy{
+public final class QuantityStrategy implements Strategy {
 
     @Override
     public List<Producer> strategy(Data data, Distributor distributor) {
@@ -16,7 +16,8 @@ public class QuantityStrategy implements Strategy{
 
         producers.sort((A, B) -> {
             if (Integer.compare(A.getEnergyPerDistributor(), B.getEnergyPerDistributor()) != 0) {
-                return (-1) * Integer.compare(A.getEnergyPerDistributor(), B.getEnergyPerDistributor());
+                return (-1) * Integer.compare(A.getEnergyPerDistributor(),
+                        B.getEnergyPerDistributor());
             } else {
                 return Integer.compare(A.getId(), B.getId());
             }
@@ -24,7 +25,8 @@ public class QuantityStrategy implements Strategy{
         List<Producer> result =  new ArrayList<>();
         int energyTotal = 0;
         while (energyTotal < distributor.getEnergyNeeded()) {
-            if (producers.get(0).getDistributors().size() != producers.get(0).getMaxDistributors()) {
+            if (producers.get(0).getDistributors().size() != producers
+                    .get(0).getMaxDistributors()) {
                 result.add(producers.get(0));
                 energyTotal += producers.get(0).getEnergyPerDistributor();
             }

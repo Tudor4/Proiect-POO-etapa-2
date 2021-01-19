@@ -93,13 +93,4 @@ public final class Consumer {
     public void setBankrupt(final boolean bankrupt) {
         isBankrupt = bankrupt;
     }
-
-    @Override
-    public String toString() {
-        return "Consumer{" +
-                "id=" + id +
-                ", isBankrupt=" + isBankrupt +
-                ", budget=" + budget +
-                '}';
-    }
 }

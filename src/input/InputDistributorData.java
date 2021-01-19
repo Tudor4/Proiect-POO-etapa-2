@@ -1,7 +1,5 @@
 package input;
 
-import strategies.EnergyChoiceStrategyType;
-
 public final class InputDistributorData {
     private int id;
     private int contractLength;

@@ -66,6 +66,10 @@ public final class Data {
         }
     }
 
+    /**
+     *  Executare update pentru producatori
+     * @param update
+     */
     public void updateProducers(final MonthlyUpdate update) {
         for (Integer producerId : update.getProducersIds()) {
             for (Producer databaseProducer : producers) {
@@ -75,6 +79,7 @@ public final class Data {
                                     .getProducersIds().indexOf(producerId)));
                     for (Distributor distributor : databaseProducer.getDistributors()) {
                         distributor.getProducers().clear();
+                        distributor.setNotified(true);
                     }
                 }
             }
@@ -305,38 +310,48 @@ public final class Data {
         }
     }
 
+    /**
+     *  Alegerea producatorilor de catre distribuitori si
+     *  calcularea pretului de productie
+     */
     public void chooseProducers() {
         for (Distributor distributor : distributors) {
-            if (distributor.getProducers().size() == 0 && !distributor.isBankrupt()) {
+            if (distributor.isNotified() && !distributor.isBankrupt()) {
                 for (Producer producer : producers) {
                     if (producer.getDistributors().contains(distributor)) {
                         producer.getDistributors().remove(distributor);
                     }
                 }
                 switch (distributor.getStrategy()) {
-                    case ("GREEN"): {
-                        distributor.getProducers().addAll(greenStrategy.strategy(this, distributor));
+                    case ("GREEN"):
+                        distributor.getProducers().addAll(greenStrategy
+                                .strategy(this, distributor));
                         break;
-                    }
-                    case ("PRICE"): {
-                        distributor.getProducers().addAll(priceStrategy.strategy(this, distributor));
+                     case ("PRICE"):
+                        distributor.getProducers().addAll(priceStrategy
+                                .strategy(this, distributor));
                         break;
-                    }
-                    case ("QUANTITY"): {
-                        distributor.getProducers().addAll(quantityStrategy.strategy(this, distributor));
+                     case ("QUANTITY"):
+                        distributor.getProducers().addAll(quantityStrategy
+                                .strategy(this, distributor));
                         break;
-                    }
+                    default:
+                        break;
                 }
                 double productionCost = 0;
                 for (Producer producer : distributor.getProducers()) {
                     productionCost += producer.getEnergyPerDistributor() * producer.getPriceKW();
                 }
-                int cost = (int) Math.round(Math.floor(productionCost / 10));
+                int cost = (int) Math.round(Math.floor(productionCost / Constants.TEN));
                 distributor.setProductionCost(cost);
+                distributor.setNotified(false);
             }
         }
     }
 
+    /**
+     *  Adaugarea unui raport lunar pentru producatori
+     */
     public void monthlyReport() {
         for (Producer producer : producers) {
             List<Integer> distributorIds = new ArrayList<>();
@@ -348,6 +363,9 @@ public final class Data {
         }
     }
 
+    /**
+     *  sortarea id-urilor distribuitorilor unui producator
+     */
     public void sort() {
         for (Producer producer : producers) {
             for (Month month : producer.getMonthlyStats()) {

@@ -2,10 +2,8 @@ package data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public final class Distributor{
+public final class Distributor {
     private int id;
     private int contractLength;
     private int budget;
@@ -19,6 +17,7 @@ public final class Distributor{
     private boolean isBankrupt = false;
     private List<Consumer> consumers = new ArrayList<>();
     private List<Producer> producers = new ArrayList<>();
+    private boolean notified = true;
 
     public Distributor(final int id, final int contractLength, final int initialBudget,
                        final int initialInfrastructureCost, final int energyNeeded,
@@ -131,17 +130,11 @@ public final class Distributor{
         return producers;
     }
 
+    public boolean isNotified() {
+        return notified;
+    }
 
-    @Override
-    public String toString() {
-        return "Distributor{" +
-                "id=" + id +
-                ", energyNeeded=" + energyNeeded +
-                ", price=" + price +
-                ", budget=" + budget +
-                ", strategy='" + strategy + '\'' +
-                ", isBankrupt=" + isBankrupt +
-                ", contracts=" + contracts +
-                '}';
+    public void setNotified(boolean notified) {
+        this.notified = notified;
     }
 }

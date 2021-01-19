@@ -30,14 +30,5 @@ public final class MonthlyUpdate {
         return producersIds;
     }
 
-    @Override
-    public String toString() {
-        return "MonthlyUpdate{" +
-                "newConsumers=" + newConsumers +
-                ", infrastructureCosts=" + infrastructureCosts +
-                ", distributorIds=" + distributorIds +
-                ", energyPerDistributor=" + energyPerDistributor +
-                ", producersIds=" + producersIds +
-                '}';
-    }
+
 }

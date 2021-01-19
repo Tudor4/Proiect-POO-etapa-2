@@ -1,6 +1,5 @@
 package input;
 
-import entities.EnergyType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -112,13 +111,15 @@ public final class InputLoader {
                             infrastructureCostChanges.add(Integer
                                     .parseInt(((JSONObject) jsonDistributorChange)
                                             .get(Constants.INFRASTRUCTURE_COST).toString()));
-                            distributorsChanged.add(Integer.parseInt(((JSONObject) jsonDistributorChange)
+                            distributorsChanged.add(Integer
+                                    .parseInt(((JSONObject) jsonDistributorChange)
                                     .get(Constants.ID).toString()));
                         }
                     }
                     if (jsonProducerChanges != null) {
                         for (Object jsonProducerChange : jsonProducerChanges) {
-                            energyPerDistributor.add(Integer.parseInt(((JSONObject) jsonProducerChange)
+                            energyPerDistributor.add(Integer
+                                    .parseInt(((JSONObject) jsonProducerChange)
                                     .get(Constants.ENERGY_PER_DISTRIBUTOR).toString()));
                             producersChanged.add(Integer.parseInt(((JSONObject) jsonProducerChange)
                                     .get(Constants.ID).toString()));

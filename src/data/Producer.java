@@ -2,9 +2,8 @@ package data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
-public class Producer extends Observable {
+public final class Producer {
     private int id;
     private String energyType;
     private int maxDistributors;
@@ -70,15 +69,5 @@ public class Producer extends Observable {
         return monthlyStats;
     }
 
-    @Override
-    public String toString() {
-        return "Producer{" +
-                "id=" + id +
-                ", maxDistributors='" + maxDistributors + '\'' +
-                ", priceKW=" + priceKW +
-                ", energyType=" + energyType +
-                ", energyPerDistributor=" + energyPerDistributor +
-                ", monthlyStats=" + monthlyStats +
-                '}';
-    }
+
 }

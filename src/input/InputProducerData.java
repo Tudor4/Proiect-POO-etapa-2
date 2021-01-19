@@ -1,6 +1,6 @@
 package input;
 
-public class InputProducerData {
+public final class InputProducerData {
     private int id;
     private String energyType;
     private int maxDistributors;

@@ -2,7 +2,7 @@ package data;
 
 import java.util.List;
 
-public class Month {
+public final class Month {
     private int monthNr;
     private List<Integer> distributorIds;
 
@@ -19,11 +19,4 @@ public class Month {
         return distributorIds;
     }
 
-    @Override
-    public String toString() {
-        return "Month{" +
-                "monthNr=" + monthNr +
-                ", distributorIds=" + distributorIds +
-                '}';
-    }
 }

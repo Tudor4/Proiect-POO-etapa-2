@@ -7,7 +7,7 @@ import data.Producer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PriceStrategy implements Strategy{
+public final class PriceStrategy implements Strategy {
 
     @Override
     public List<Producer> strategy(Data data, Distributor distributor) {
@@ -18,8 +18,10 @@ public class PriceStrategy implements Strategy{
             if (Double.compare(A.getPriceKW(), B.getPriceKW()) != 0) {
                 return Double.compare(A.getPriceKW(), B.getPriceKW());
             } else {
-                if (Integer.compare(A.getEnergyPerDistributor(), B.getEnergyPerDistributor()) != 0) {
-                    return (-1) * Integer.compare(A.getEnergyPerDistributor(), B.getEnergyPerDistributor());
+                if (Integer.compare(A.getEnergyPerDistributor(),
+                        B.getEnergyPerDistributor()) != 0) {
+                    return (-1) * Integer.compare(A.getEnergyPerDistributor(),
+                            B.getEnergyPerDistributor());
                 } else {
                     return Integer.compare(A.getId(), B.getId());
                 }
@@ -30,7 +32,8 @@ public class PriceStrategy implements Strategy{
         int energyTotal = 0;
 
         while (energyTotal < distributor.getEnergyNeeded()) {
-            if (producers.get(0).getDistributors().size() != producers.get(0).getMaxDistributors()) {
+            if (producers.get(0).getDistributors().size() != producers
+                    .get(0).getMaxDistributors()) {
                 result.add(producers.get(0));
                 energyTotal += producers.get(0).getEnergyPerDistributor();
             }

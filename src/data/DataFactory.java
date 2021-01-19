@@ -44,6 +44,11 @@ public final class DataFactory {
                 inputDistributor.getEnergyNeeded(), inputDistributor.getStrategy());
     }
 
+    /**
+     * factory pentru Producer
+     * @param inputProducer
+     * @return
+     */
     public Producer createProducer(final InputProducerData inputProducer) {
         return new Producer(inputProducer.getId(), inputProducer.getEnergyType(),
                 inputProducer.getMaxDistributors(), inputProducer.getPriceKW(),
@@ -62,7 +67,8 @@ public final class DataFactory {
         }
         monthlyUpdate.getDistributorIds().addAll(inputMonthlyUpdate.getDistributorIds());
         monthlyUpdate.getInfrastructureCosts().addAll(inputMonthlyUpdate.getInfrastructureCosts());
-        monthlyUpdate.getEnergyPerDistributor().addAll(inputMonthlyUpdate.getEnergyPerDistributor());
+        monthlyUpdate.getEnergyPerDistributor()
+                .addAll(inputMonthlyUpdate.getEnergyPerDistributor());
         monthlyUpdate.getProducersIds().addAll(inputMonthlyUpdate.getProducerIds());
         return monthlyUpdate;
     }

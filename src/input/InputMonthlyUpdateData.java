@@ -6,18 +6,18 @@ public final class InputMonthlyUpdateData {
     private List<InputConsumerData> newConsumers;
     private List<Integer> infrastructureCosts;
     private List<Integer> distributorIds;
-    private List<Integer> EnergyPerDistributor;
+    private List<Integer> energyPerDistributor;
     private List<Integer> producerIds;
 
     public InputMonthlyUpdateData(final List<InputConsumerData> newConsumers,
                                   final List<Integer> infrastructureCosts,
                                   final List<Integer> distributorIds,
-                                  final List<Integer> EnergyPerDistributor,
+                                  final List<Integer> energyPerDistributor,
                                   final List<Integer> producerIds) {
         this.newConsumers = newConsumers;
         this.infrastructureCosts = infrastructureCosts;
         this.distributorIds = distributorIds;
-        this.EnergyPerDistributor = EnergyPerDistributor;
+        this.energyPerDistributor = energyPerDistributor;
         this.producerIds = producerIds;
     }
 
@@ -34,7 +34,7 @@ public final class InputMonthlyUpdateData {
     }
 
     public List<Integer> getEnergyPerDistributor() {
-        return EnergyPerDistributor;
+        return energyPerDistributor;
     }
 
     public List<Integer> getProducerIds() {
